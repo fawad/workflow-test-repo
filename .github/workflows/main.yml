@@ -11,10 +11,13 @@ env:
   ORG_GIT_URL: git@github.com:almana-agh
 
 jobs:
-  sync_main_branches:
+  copy_in_clone:
     runs-on: ubuntu-latest
     steps:
       - name: Sync main branches
         run: |
-          echo "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
-          echo $ORG_GIT_URL
+          git clone "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
+          git remote add $ORIGINAL_REPO_NAME ${{ github.event.repository.ssh_url }}
+          git remote update
+          git merge $ORIGINAL_REPO_NAME/main
+          git push origin main
