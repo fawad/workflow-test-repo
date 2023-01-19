@@ -16,11 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3.3.0
       with:
+        repository: fawad/workflow-test-repo
         token: ${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}
+        fetch-depth: 0
     - name: Sync main branches
       run: |
-        git clone ${{ env.ORG_GIT_URL }}/${{ env.ORIGINAL_REPO_NAME }}-repo.git
-        cd ${{ env.ORIGINAL_REPO_NAME }}
         git remote add ${{ env.ORIGINAL_REPO_NAME }} ${{ github.event.repository.ssh_url }}
         git remote update
         git merge ${{ env.ORIGINAL_REPO_NAME }}/main
