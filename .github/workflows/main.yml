@@ -15,13 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3.3.0
-      with:
-        repository: fawad/${{ github.event.repository.name }}-repo
-        token: ${{ secrets.ACCESS_TOKEN }}
     - name: Sync main branches
       run: |
-        git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-        git config --global user.email "username@users.noreply.github.com"
+        eval `ssh-agent -s`
+        ssh-add - <<< '${{ secrets.PRIVATE_SSH_KEY }}'
         git clone "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
         cd $ORIGINAL_REPO_NAME
         git remote add $ORIGINAL_REPO_NAME ${{ github.event.repository.ssh_url }}
