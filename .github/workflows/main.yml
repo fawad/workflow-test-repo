@@ -16,7 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3.3.0
       with:
-        repository: organization_name/repo_name
         token: ${{ secrets.ACCESS_TOKEN }}
     - name: Sync main branches
       run: |
