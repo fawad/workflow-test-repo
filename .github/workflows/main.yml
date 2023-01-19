@@ -19,9 +19,9 @@ jobs:
         token: ${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}
     - name: Sync main branches
       run: |
-        git clone "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
-        cd "$ORIGINAL_REPO_NAME"
-        git remote add "$ORIGINAL_REPO_NAME" ${{ github.event.repository.ssh_url }}
+        git clone "${{ ORG_GIT_URL }}/${{ ORIGINAL_REPO_NAME }}-repo.git"
+        cd "${{ ORIGINAL_REPO_NAME }}"
+        git remote add "${{ ORIGINAL_REPO_NAME }}" ${{ github.event.repository.ssh_url }}
         git remote update
-        git merge "$ORIGINAL_REPO_NAME"/main
+        git merge "${{ ORIGINAL_REPO_NAME }}"/main
         git push origin main
