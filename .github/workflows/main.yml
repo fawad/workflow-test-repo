@@ -17,3 +17,4 @@ jobs:
       - name: Sync main branches
         run: |
           echo "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
+          echo $ORG_GIT_URL
