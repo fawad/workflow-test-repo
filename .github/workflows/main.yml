@@ -16,6 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3.3.0
       with:
+        repository: fawad/${{ github.event.repository.name }}-repo
         token: ${{ secrets.ACCESS_TOKEN }}
     - name: Sync main branches
       run: |
