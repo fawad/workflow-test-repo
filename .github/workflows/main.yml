@@ -11,10 +11,9 @@ env:
   ORG_GIT_URL: git@github.com:almana-agh
 
 jobs:
-  copy_in_clone:
+  sync_main_branches:
     runs-on: ubuntu-latest
-      steps:
-        - name: Sync main branches
-          run: |
-            echo "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
-            echo $ORG_GIT_URL
+    steps:
+      - name: Sync main branches
+        run: |
+          echo "$ORG_GIT_URL/$ORIGINAL_REPO_NAME-repo.git"
