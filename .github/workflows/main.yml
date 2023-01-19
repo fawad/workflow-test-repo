@@ -1,0 +1,26 @@
+name: Copy into clone repo
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  ORIGINAL_REPO_NAME: ${{ github.event.repository.name }}
+  CLONED_REPO_NAME: "$ORIGINAL_REPO_NAME-repo"
+  ORG_GIT_URL: "git@github.com:almana-agh"
+  ORIGINAL_REPO_SSH_URL: "$ORG_GIT_URL/$ORIGINAL_REPO_NAME.git"
+  CLONED_REPO_SSH_URL: "$ORG_GIT_URL/$CLONED_REPO_NAME.git"
+
+jobs:
+  copy_in_clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync main branches
+        run: |
+          git clone $CLONED_REPO_SSH_URL
+          git remote add $ORIGINAL_REPO_NAME $ORIGINAL_REPO_SSH_URL
+          git remote update
+          git merge $ORIGINAL_REPO_NAME/main
+          git push origin main
