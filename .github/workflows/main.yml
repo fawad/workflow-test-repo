@@ -14,7 +14,7 @@ jobs:
   copy_in_clone:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.6.0
+    - uses: actions/checkout@v2.3.4
       with:
         repository: fawad/workflow-test-repo
         token: ${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}
