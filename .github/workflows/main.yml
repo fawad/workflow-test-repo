@@ -8,7 +8,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   ORIGINAL_REPO_NAME: ${{ github.event.repository.name }}
-  ORG_GIT_URL: git@github.com:fawad
+  ORG_NAME: fawad
 
 jobs:
   copy_in_clone:
@@ -16,9 +16,9 @@ jobs:
     steps:
     - name: Sync main branches
       run: |
-        git clone https://fawad:${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}@github.com/fawad/workflow-test-repo.git
-        cd workflow-test-repo
-        git remote add ${{ env.ORIGINAL_REPO_NAME }} ${{ github.event.repository.ssh_url }}
+        git clone https://${{ env.ORG_NAME }}:${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}@github.com/${{ env.ORG_NAME }}/${{ env.ORIGINAL_REPO_NAME }}-repo.git
+        cd ${{ env.ORIGINAL_REPO_NAME }}-repo
+        git remote add ${{ env.ORIGINAL_REPO_NAME }} https://${{ env.ORG_NAME }}:${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}@github.com/${{ env.ORG_NAME }}/${{ env.ORIGINAL_REPO_NAME }}.git
         git remote update
         git merge ${{ env.ORIGINAL_REPO_NAME }}/main
         git push origin main
