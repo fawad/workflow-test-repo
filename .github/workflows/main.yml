@@ -18,7 +18,7 @@ jobs:
       with:
         repository: fawad/workflow-test-repo
         token: ${{ secrets.ACCESS_TOKEN_FOR_WORKFLOWS }}
-        ref: main
+        path: './repo'
     - name: Sync main branches
       run: |
         git remote add ${{ env.ORIGINAL_REPO_NAME }} ${{ github.event.repository.ssh_url }}
